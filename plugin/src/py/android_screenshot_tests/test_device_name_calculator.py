@@ -19,10 +19,8 @@ class TestDeviceNameCalculator(unittest.TestCase):
                 return '19'
             elif 'com.google.android.gms' in parameters:
                 return 'package:/data/app/com.google.android.gms-pHwJaHhvXiRvuTo2Qxdbww==/base.apk'
-            elif 'density' in parameters:
-                return 'Physical density: 420'
-            elif 'size' in parameters:
-                return 'Physical size: 1080x1920'
+            elif 'window' in parameters:
+                return 'init=1080x1920 420dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1794x1731'
             elif 'ro.product.cpu.abi' in parameters:
                 return 'arm64-v8a'
             elif 'persist.sys.locale' in parameters:
@@ -44,10 +42,8 @@ class TestDeviceNameCalculator(unittest.TestCase):
                 return '23'
             elif 'com.google.android.gms' in parameters:
                 return None
-            elif 'density' in parameters:
-                return 'Physical density: 420'
-            elif 'size' in parameters:
-                return 'Physical size: 1080x1920'
+            elif 'window' in parameters:
+                return 'init=1080x1920 420dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1794x1731'
             elif 'ro.product.cpu.abi' in parameters:
                 return 'arm64-v8a'
             elif 'persist.sys.locale' in parameters:
@@ -69,10 +65,8 @@ class TestDeviceNameCalculator(unittest.TestCase):
                 return '25'
             elif 'com.google.android.gms' in parameters:
                 return None
-            elif 'density' in parameters:
-                return 'Physical density: 420'
-            elif 'size' in parameters:
-                return 'Physical size: 1080x1920'
+            elif 'window' in parameters:
+                return 'init=1080x1920 420dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1794x1731'
             elif 'ro.product.cpu.abi' in parameters:
                 return 'x86'
             elif 'persist.sys.locale' in parameters:
@@ -92,7 +86,12 @@ class TestDeviceNameCalculator(unittest.TestCase):
 
     def test_density_10_to_LDPI(self):
         def mock_data(parameters):
-            return 'Physical density: 10'
+            return '''
+            WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
+              Display: mDisplayId=0
+                init=1080x1920 10dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1794x1731
+                deferred=false mLayoutNeeded=false mTouchExcludeRegion=SkRegion((0,0,1080,1920))
+            '''
 
         adb_executor = MagicMock()
         adb_executor.execute.side_effect = mock_data
@@ -105,7 +104,12 @@ class TestDeviceNameCalculator(unittest.TestCase):
 
     def test_density_140_to_MDPI(self):
         def mock_data(parameters):
-            return 'Physical density: 140'
+            return '''
+            WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
+              Display: mDisplayId=0
+                init=1080x1920 140dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1794x1731
+                deferred=false mLayoutNeeded=false mTouchExcludeRegion=SkRegion((0,0,1080,1920))
+            '''
 
         adb_executor = MagicMock()
         adb_executor.execute.side_effect = mock_data
@@ -118,7 +122,12 @@ class TestDeviceNameCalculator(unittest.TestCase):
 
     def test_density_200_to_HDPI(self):
         def mock_data(parameters):
-            return 'Physical density: 200'
+            return '''
+            WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
+              Display: mDisplayId=0
+                init=1080x1920 200dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1794x1731
+                deferred=false mLayoutNeeded=false mTouchExcludeRegion=SkRegion((0,0,1080,1920))
+            '''
 
         adb_executor = MagicMock()
         adb_executor.execute.side_effect = mock_data
@@ -131,7 +140,12 @@ class TestDeviceNameCalculator(unittest.TestCase):
 
     def test_density_250_to_XHDPI(self):
         def mock_data(parameters):
-            return 'Physical density: 250'
+            return '''
+            WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
+              Display: mDisplayId=0
+                init=1080x1920 250dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1794x1731
+                deferred=false mLayoutNeeded=false mTouchExcludeRegion=SkRegion((0,0,1080,1920))
+            '''
 
         adb_executor = MagicMock()
         adb_executor.execute.side_effect = mock_data
@@ -144,7 +158,12 @@ class TestDeviceNameCalculator(unittest.TestCase):
 
     def test_density_340_to_XXHDPI(self):
         def mock_data(parameters):
-            return 'Physical density: 340'
+            return '''
+            WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
+              Display: mDisplayId=0
+                init=1080x1920 340dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1794x1731
+                deferred=false mLayoutNeeded=false mTouchExcludeRegion=SkRegion((0,0,1080,1920))
+            '''
 
         adb_executor = MagicMock()
         adb_executor.execute.side_effect = mock_data
@@ -157,7 +176,12 @@ class TestDeviceNameCalculator(unittest.TestCase):
 
     def test_density_500_to_XXXHDPI(self):
         def mock_data(parameters):
-            return 'Physical density: 500'
+            return '''
+            WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)
+              Display: mDisplayId=0
+                init=1080x1920 500dpi cur=1080x1920 app=1080x1794 rng=1080x1017-1794x1731
+                deferred=false mLayoutNeeded=false mTouchExcludeRegion=SkRegion((0,0,1080,1920))
+            '''
 
         adb_executor = MagicMock()
         adb_executor.execute.side_effect = mock_data

@@ -52,16 +52,16 @@ class DeviceNameCalculator:
         return 'XXXHDPI'
 
     def _screen_density(self):
-        result = self.executor.execute(['shell', 'wm', 'density'])
-        density = re.search('[0-9]+', result)
+        result = self.executor.execute(['shell', 'dumpsys', 'window'])
+        density = re.search('([0-9]+)dpi', result, re.MULTILINE)
         if density:
-            return density.group(0)
+            return density.group(1)
 
     def _screen_size_text(self):
-        result = self.executor.execute(['shell', 'wm', 'size'])
-        density = re.search('[0-9]+x[0-9]+', result)
+        result = self.executor.execute(['shell', 'dumpsys', 'window'])
+        density = re.search('cur=([0-9]+x[0-9]+)', result, re.MULTILINE)
         if density:
-            return density.group(0)
+            return density.group(1)
 
     def _has_play_services(self):
         try:
